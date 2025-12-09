@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPC Sheet Viewer</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; }
+    .login-container, .sheet-container {
+      max-width: 400px; margin: 80px auto; padding: 20px;
+      background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 { text-align: center; }
+    input { width: 100%; padding: 10px; margin: 10px 0; }
+    button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    iframe { width: 100%; height: 90vh; border: none; }
+  </style>
+</head>
+<body>
+  <div class="login-container" id="loginBox">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p id="error" style="color:red; text-align:center;"></p>
+  </div>
+
+  <div class="sheet-container" id="sheetBox" style="display:none; max-width:100%;">
+    <h2 style="text-align:center;">CPC Google Sheet</h2>
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS54ETgtjxPwnVN8S7JPPP79Z_JfUBZbOF2p3-j2Rf1PdiH_j6GLHPCpIZUp5kYScSRaewxktCJXK50/pubhtml?gid=959282931&single=true"></iframe>
+  </div>
+
+  <script>
+    const allowedUsers = {
+      dan: "vitol",
+      jamie: "shell",
+      suezmaxteam: "suezmaxteam"
+    };
+
+    function login() {
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const error = document.getElementById("error");
+
+      if (allowedUsers[user] && allowedUsers[user] === pass) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("sheetBox").style.display = "block";
+      } else {
+        error.textContent = "Invalid username or password";
+      }
+    }
+  </script>
+</body>
+</html>
